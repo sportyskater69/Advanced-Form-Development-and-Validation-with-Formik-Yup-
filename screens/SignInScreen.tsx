@@ -1,8 +1,11 @@
 import InputField from "@/components/InputField";
 import { Formik } from "formik";
-import { Button, StyleSheet, View } from "react-native";
+import { Button, Pressable, StyleSheet, Text, View } from "react-native";
 import * as Yup from "yup";
 
+type Props = {
+    navigation: any;
+};
 
 const SignInSchema = Yup.object().shape({
     email: Yup.string()
@@ -15,7 +18,7 @@ const SignInSchema = Yup.object().shape({
 });
 
 
-export default function SignInScreen() {
+export default function SignInScreen({ navigation }: Props) {
     return (
         <View style={styles.container}>
             <Formik
@@ -62,6 +65,11 @@ export default function SignInScreen() {
                     </>
                 )}
             </Formik>
+
+            <View style={styles.redirectView}>
+                <Pressable onPress={() => navigation.navigate("Sign up")} style={styles.redirect}>
+                    <Text>Don&apos;t have an account? Sign Up</Text>
+                </Pressable></View>
         </View>
     );
 }
@@ -70,4 +78,11 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
     },
+    redirect: {
+        padding: 10,
+    },
+    redirectView: {
+        justifyContent: "center",
+        alignItems: "center"
+    }
 });
