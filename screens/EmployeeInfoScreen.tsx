@@ -1,13 +1,13 @@
 import { Formik } from "formik";
 import React, { useState } from "react";
 import {
-    Button,
-    KeyboardAvoidingView,
-    Platform,
-    Pressable,
-    ScrollView,
-    Text,
-    View,
+  Button,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
 } from "react-native";
 import * as Yup from "yup";
 import InputField from "../components/InputField";
@@ -167,7 +167,7 @@ export default function EmployeeInfoScreen({ navigation }: Props) {
         </Formik>
 
         <View>
-          <Pressable onPress={() => navigation.navigate("SignIn")}>
+          <Pressable onPress={() => navigation.navigate("Sign in")}>
             <Text>Back to Sign In</Text>
           </Pressable>
         </View>
