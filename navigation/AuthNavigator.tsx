@@ -10,6 +10,7 @@ export default function AuthNavigator() {
     return (
         <Stack.Navigator 
         screenOptions={{
+        headerShown: false,
         headerStyle: {
           backgroundColor: colors.card,
         },
@@ -20,6 +21,7 @@ export default function AuthNavigator() {
         contentStyle: {
           backgroundColor: colors.background,
         },
+
         }}
         >
             <Stack.Screen name="Sign in" component={SignInScreen} />
