@@ -6,11 +6,13 @@ import {
   Platform,
   Pressable,
   ScrollView,
+  StyleSheet,
   Text,
   View,
 } from "react-native";
 import * as Yup from "yup";
 import InputField from "../components/InputField";
+import { colors } from "../theme/MainColors";
 
 type Props = {
   navigation: any;
@@ -61,7 +63,7 @@ export default function EmployeeInfoScreen({ navigation }: Props) {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.scrollViewPadding}>
         <Formik
           initialValues={{
             firstName: "",
@@ -97,7 +99,7 @@ export default function EmployeeInfoScreen({ navigation }: Props) {
             touched,
             isValid,
           }) => (
-            <View>
+            <View style={styles.card}>
               <InputField
                 label="First Name"
                 value={values.firstName}
@@ -157,21 +159,63 @@ export default function EmployeeInfoScreen({ navigation }: Props) {
                 error={touched.startDate ? errors.startDate : undefined}
               />
 
-              <Button
-                title={submitting ? "Submitting..." : "Submit"}
+              <Pressable
                 onPress={handleSubmit as any}
                 disabled={!isValid || submitting}
-              />
+                style={[
+                  styles.button,
+                  (!isValid || submitting) && styles.buttonDisabled,
+                ]}
+              >
+                <Text style={styles.buttonText}>
+                  {submitting ? "Submitting..." : "Submit"}
+                </Text>
+              </Pressable>
+
+              <Pressable onPress={() => navigation.navigate("Sign in")}>
+                <Text style={styles.link}>Back to Sign In</Text>
+              </Pressable>
             </View>
           )}
         </Formik>
 
         <View>
-          <Pressable onPress={() => navigation.navigate("Sign in")}>
-            <Text>Back to Sign In</Text>
-          </Pressable>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollViewPadding: {
+    padding: 20,
+  },
+  card: {
+  backgroundColor: colors.card,
+  borderRadius: 20,
+  padding: 20,
+  borderWidth: 2,
+  borderColor: colors.border,
+  },
+  link: {
+    color: colors.primary,
+    marginTop: 10,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: colors.primary,
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: "center",
+    marginTop: 8,
+  },
+  buttonDisabled: {
+    opacity: 0.5,
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: "700",
+  },
+});

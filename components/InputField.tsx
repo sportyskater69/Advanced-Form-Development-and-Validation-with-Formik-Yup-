@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TextInput, TextInputProps, View } from "react-native";
+import { colors } from "../theme/MainColors";
 
 interface Props extends TextInputProps {
     label: string;
@@ -7,27 +8,48 @@ interface Props extends TextInputProps {
 }
 
 export default function InputField({ label, error, touched, ...props }: Props) {
+  const showError = touched && error;
 
-    return (
-        <View style={styles.container}>
-            <Text>{label}</Text>
-            <TextInput style={styles.input} {...props} />
-            {touched && error && <Text style={styles.error}>{error}</Text>}
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+        <Text style={styles.label}>{label}</Text>
+            <TextInput
+                style={[styles.input, showError && styles.inputError]}
+                placeholderTextColor={colors.subtext}
+                {...props}
+                />
+            {showError && <Text style={styles.error}>{error}</Text>}
+    </View>
+  );
 }
 
 
 const styles = StyleSheet.create({
-    container: { marginBottom: 15 },
-    input: {
-        borderWidth: 1,
-        borderColor: "#ccc",
-        padding: 10,
-        borderRadius: 6,
-    },
-    error: {
-        color: "red",
-        marginTop: 4,
-    },
+  container: {
+    marginBottom: 18,
+  },
+  label: {
+    color: colors.text,
+    marginBottom: 8,
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    backgroundColor: colors.inputBg,
+    color: colors.text,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderRadius: 12,
+    fontSize: 16,
+  },
+  inputError: {
+    borderColor: colors.error,
+  },
+  error: {
+    color: colors.error,
+    marginTop: 6,
+    fontSize: 12,
+  },
 });
