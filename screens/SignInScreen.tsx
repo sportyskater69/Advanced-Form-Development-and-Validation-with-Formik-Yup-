@@ -1,6 +1,6 @@
 import InputField from "@/components/InputField";
 import { Formik } from "formik";
-import { Button, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import * as Yup from "yup";
 import { colors } from "../theme/MainColors";
 
