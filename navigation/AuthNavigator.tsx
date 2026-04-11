@@ -1,8 +1,8 @@
+import { colors } from "@/theme/MainColors";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import EmployeeInfoScreen from "../screens/EmployeeInfoScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
-import EmployeeInfoScreen from "../screens/EmployeeInfoScreen";
-import { colors } from "@/theme/MainColors";
 
 const Stack = createNativeStackNavigator();
 
